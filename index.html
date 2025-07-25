@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,24 +7,15 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
-    .font-playfair {
-      font-family: 'Playfair Display', serif;
-    }
-
-    .font-inter {
-      font-family: 'Inter', sans-serif;
-    }
+    .font-playfair { font-family: 'Playfair Display', serif; }
+    .font-inter { font-family: 'Inter', sans-serif; }
 
     .splash-screen {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       background-color: #000;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      display: flex; justify-content: center; align-items: center;
       z-index: 9999;
       opacity: 1;
       transition: opacity 0.5s ease-out;
@@ -44,20 +34,9 @@
     }
 
     @keyframes fadeInScale {
-      0% {
-        opacity: 0;
-        transform: scale(0.5);
-      }
-
-      50% {
-        opacity: 1;
-        transform: scale(1.1);
-      }
-
-      100% {
-        opacity: 1;
-        transform: scale(1);
-      }
+      0% { opacity: 0; transform: scale(0.5); }
+      50% { opacity: 1; transform: scale(1.1); }
+      100% { opacity: 1; transform: scale(1); }
     }
 
     .carousel-container {
@@ -67,9 +46,7 @@
       -ms-overflow-style: none;
     }
 
-    .carousel-container::-webkit-scrollbar {
-      display: none;
-    }
+    .carousel-container::-webkit-scrollbar { display: none; }
 
     .carousel-track {
       display: flex;
@@ -94,7 +71,7 @@
   <div id="mainContent" style="display: none;">
     <!-- Hero Section -->
     <section class="min-h-screen relative">
-      <img src="/LandingAzj/images/foto1.jpg" alt="Modelo Azzejo" class="absolute inset-0 w-full h-full object-contain bg-[#1a1a1a]" />
+      <img src="./images/foto1.jpg" alt="Modelo Azzejo" class="absolute inset-0 w-full h-full object-cover bg-[#1a1a1a]" />
       <div class="relative z-10 flex items-center justify-center min-h-screen bg-black/60">
         <div class="text-center px-6 max-w-4xl">
           <h1 class="font-playfair text-6xl md:text-8xl font-bold mb-8">Azzejo</h1>
@@ -118,7 +95,7 @@
       <div class="container mx-auto px-6">
         <div class="flex flex-col lg:flex-row items-center gap-12">
           <div class="lg:w-1/2">
-            <img src="/LandingAzj/images/foto2.jpg" alt="Modelo Parceria" class="w-full rounded-2xl shadow-2xl object-contain bg-[#1a1a1a]">
+            <img src="./images/foto2.jpg" alt="Modelo Parceria" class="w-full rounded-2xl shadow-2xl object-contain bg-[#1a1a1a]">
           </div>
           <div class="lg:w-1/2 text-center lg:text-left">
             <h2 class="font-playfair text-4xl md:text-5xl font-bold mb-6">
@@ -138,10 +115,18 @@
         <h2 class="font-playfair text-4xl md:text-5xl font-bold text-center mb-16">
           Nossa Coleção Exclusiva
         </h2>
-        <div class="carousel-container">
-          <div id="carouselTrack" class="carousel-track">
-            <!-- Itens do carrossel serão gerados via JS -->
+        <div class="relative">
+          <button id="prevBtn" class="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black text-white p-3 rounded-full hidden md:block">
+            &#10094;
+          </button>
+          <div class="carousel-container">
+            <div id="carouselTrack" class="carousel-track">
+              <!-- Imagens geradas via JS -->
+            </div>
           </div>
+          <button id="nextBtn" class="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black text-white p-3 rounded-full hidden md:block">
+            &#10095;
+          </button>
         </div>
       </div>
     </section>
@@ -154,8 +139,6 @@
         </h2>
         <p class="text-xl mb-8 max-w-2xl mx-auto">
           Entre em contato agora e descubra como a Azzejo pode transformar seu negócio de revenda!
-        </p>
-        <p class="text-lg md:text-xl font-medium bg-[#f5f0e1] text-[#111111] px-6 py-3 rounded-full inline-block mb-8">
         </p>
         <a href="https://wa.me/5511999999999" target="_blank"
           class="bg-[#6c7a63] hover:bg-[#55624e] text-white px-8 py-4 rounded-full font-semibold text-lg shadow-lg">
@@ -174,6 +157,17 @@
     </footer>
   </div>
 
+  <!-- WhatsApp Floating Button -->
+  <a href="https://wa.me/5511999999999" target="_blank"
+     class="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg transition-all duration-300"
+     aria-label="Fale conosco no WhatsApp">
+    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/>
+      <path d="M12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488 11.815 11.815 0 0012.05 0z"/>
+    </svg>
+  </a>
+
+  <!-- JavaScript -->
   <script>
     window.addEventListener('load', function () {
       setTimeout(function () {
@@ -193,14 +187,14 @@
     };
 
     const clothingItems = [
-      '/LandingAzj/images/foto1.jpg',
-      '/LandingAzj/images/foto2.jpg',
-      '/LandingAzj/images/foto3.jpg',
-      '/LandingAzj/images/foto4.jpg',
-      '/LandingAzj/images/foto5.jpg',
-      '/LandingAzj.images/foto6.jpg',
-      '/LandingAzj.images/foto7.jpg',
-      '/LandingAzj.images/foto8.jpg'
+      './images/foto1.jpg',
+      './images/foto2.jpg',
+      './images/foto3.jpg',
+      './images/foto4.jpg',
+      './images/foto5.jpg',
+      './images/foto6.jpg',
+      './images/foto7.jpg',
+      './images/foto8.jpg'
     ];
 
     function initializeCarousel() {
@@ -210,13 +204,20 @@
         carouselItem.className = 'carousel-item';
         carouselItem.innerHTML = `
           <div class="bg-[#f5f0e1] rounded-2xl overflow-hidden">
-            <img src="${item}" alt="Roupa ${index + 1}" class="w-full h-96 object-contain bg-[#ffffff] p-4">
+            <img src="${item}" loading="lazy" alt="Roupa ${index + 1}" class="w-full h-96 object-contain bg-white p-4 mx-auto">
           </div>
         `;
         track.appendChild(carouselItem);
       });
     }
+
+    document.getElementById("nextBtn").addEventListener("click", () => {
+      document.querySelector(".carousel-container").scrollBy({ left: 300, behavior: "smooth" });
+    });
+
+    document.getElementById("prevBtn").addEventListener("click", () => {
+      document.querySelector(".carousel-container").scrollBy({ left: -300, behavior: "smooth" });
+    });
   </script>
 </body>
-
 </html>
