@@ -4,29 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Azzejo - Moda Feminina Atacado</title>
-    <!-- 
-    ========================================
-    CONFIGURAÇÕES EDITÁVEIS
-    ========================================
-    Para editar no VSCode:
-    1. Substitua as URLs das imagens pelos caminhos das suas fotos
-    2. Edite os textos marcados com comentários
-    3. Altere cores, fontes e estilos conforme necessário
-    -->
+    <title>Azzejo - Alta Moda Feminina</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         .font-playfair { font-family: 'Playfair Display', serif; }
         .font-inter { font-family: 'Inter', sans-serif; }
-        
+
         .splash-screen {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #000;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -34,69 +25,50 @@
             opacity: 1;
             transition: opacity 0.5s ease-out;
         }
-        
+
         .splash-screen.fade-out {
             opacity: 0;
             pointer-events: none;
         }
-        
+
         .logo-animation {
             font-size: 4rem;
             font-weight: bold;
             color: white;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
             animation: fadeInScale 1.3s ease-out;
         }
-        
+
         @keyframes fadeInScale {
-            0% {
-                opacity: 0;
-                transform: scale(0.5);
-            }
-            50% {
-                opacity: 1;
-                transform: scale(1.1);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
+            0% { opacity: 0; transform: scale(0.5); }
+            50% { opacity: 1; transform: scale(1.1); }
+            100% { opacity: 1; transform: scale(1); }
         }
-        
+
         .carousel-container {
             overflow-x: auto;
             overflow-y: hidden;
-            position: relative;
-            scrollbar-width: none; /* Firefox */
-            -ms-overflow-style: none; /* IE and Edge */
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            display: flex;
         }
-        
-        .carousel-container::-webkit-scrollbar {
-            display: none; /* Chrome, Safari, Opera */
-        }
-        
+
         .carousel-track {
             display: flex;
             gap: 20px;
             padding: 0 20px;
         }
-        
+
         .carousel-item {
-            min-width: 300px;
             flex-shrink: 0;
+            scroll-snap-align: center;
+            width: 300px;
         }
-        
-        @media (max-width: 768px) {
-            .carousel-item {
-                min-width: 250px;
-            }
-        }
-        
+
         .whatsapp-btn {
             background: #25d366;
             transition: all 0.3s ease;
         }
-        
+
         .whatsapp-btn:hover {
             background: #128c7e;
             transform: translateY(-2px);
@@ -105,200 +77,84 @@
     </style>
 </head>
 
-<body class="font-inter bg-gray-50">
-    <!-- Splash Screen -->
+<body class="font-inter bg-[#111827] text-white">
     <div id="splashScreen" class="splash-screen">
-        <!-- EDITÁVEL: Nome da marca na splash screen -->
         <div class="logo-animation font-playfair">Azzejo</div>
     </div>
 
-    <!-- Main Content -->
     <div id="mainContent" style="display: none;">
-        <!-- Hero Section -->
-        <section class="min-h-screen bg-gradient-to-br from-purple-600 to-pink-600 relative overflow-hidden">
-            <div class="absolute inset-0">
-                <!-- 
-                EDITÁVEL: IMAGEM PRINCIPAL DO HERO
-                Substitua o src abaixo pelo caminho da sua foto principal
-                Exemplo: src="./images/hero-model.jpg"
-                -->
-                <img src="/images/foto1.jpg" 
-                     alt="Modelo Azzejo" 
-                     class="w-full h-full object-cover opacity-60">
-            </div>
-            
-            <div class="relative z-10 flex items-center justify-center min-h-screen">
-                <div class="text-center text-white px-6 max-w-4xl">
-                    <!-- EDITÁVEL: Nome da marca principal -->
-                    <h1 class="font-playfair text-6xl md:text-8xl font-bold mb-8 text-shadow-lg">
-                        Azzejo
-                    </h1>
-                    
-                    <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 mb-8">
-                        <!-- EDITÁVEL: Título principal da CTA -->
-                        <h2 class="font-inter text-2xl md:text-3xl font-semibold mb-6 leading-tight">
-                            Quer revender moda com diferencial e sair na frente?
-                        </h2>
-                        <!-- EDITÁVEL: Subtítulo da CTA -->
-                        <p class="text-xl md:text-2xl mb-6">
-                            Na Azzejo você encontra estilo e lucro.
-                        </p>
-
-                    </div>
-                    
-                    <!-- EDITÁVEL: Texto do botão -->
-                    <button onclick="scrollToCarousel()" class="bg-white text-purple-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-100 transition-all duration-300 transform hover:scale-105">
-                        Conheça Nossa Coleção
-                    </button>
+        <!-- Hero -->
+        <section class="min-h-screen relative">
+            <img src="./images/foto1.jpg" alt="Modelo Azzejo" class="absolute inset-0 w-full h-full object-cover z-0">
+            <div class="relative z-10 bg-black/50 min-h-screen flex items-center justify-center">
+                <div class="text-center px-6 max-w-3xl">
+                    <h1 class="font-playfair text-6xl md:text-7xl font-bold mb-6">Azzejo</h1>
+                    <h2 class="text-2xl md:text-3xl mb-4">Quer revender alta moda feminina com exclusividade?</h2>
+                    <p class="text-lg md:text-xl mb-8">Peças premium para revendedoras exigentes. Pedidos a partir de R$700.</p>
+                    <button onclick="scrollToCarousel()" class="bg-white text-black px-6 py-3 rounded-full font-semibold hover:bg-gray-200 transition">Conheça nossa coleção</button>
                 </div>
             </div>
         </section>
 
-        <!-- Partnership Section -->
-        <section id="carousel-section" class="py-20 bg-white">
-            <div class="container mx-auto px-6">
-                <div class="flex flex-col lg:flex-row items-center gap-12">
-                    <div class="lg:w-1/2">
-                        <!-- 
-                        EDITÁVEL: IMAGEM DA SEÇÃO PARCERIA
-                        Substitua o src abaixo pelo caminho da sua segunda foto
-                        Exemplo: src="./images/partnership-model.jpg"
-                        -->
-                        <img src="/images/foto2.jpg" 
-                             alt="Modelo Parceria" 
-                             class="w-full rounded-2xl shadow-2xl">
-                    </div>
-                    
-                    <div class="lg:w-1/2 text-center lg:text-left">
-                        <!-- EDITÁVEL: Título da seção parceria -->
-                        <h2 class="font-playfair text-4xl md:text-5xl font-bold text-gray-800 mb-6">
-                            A Azzejo é a parceira ideal para quem busca moda que encanta e vende rápido.
-                        </h2>
-                        <!-- EDITÁVEL: Descrição da seção parceria -->
-                        <p class="text-xl text-gray-600 leading-relaxed">
-                            Oferecemos peças exclusivas, qualidade premium e margens que garantem o seu sucesso no mercado de revenda.
-                        </p>
-                    </div>
+        <!-- Sobre -->
+        <section class="py-16 bg-[#1f2937]">
+            <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center gap-10">
+                <img src="./images/foto2.jpg" class="w-full md:w-1/2 rounded-xl shadow-xl" alt="Look Azzejo">
+                <div class="md:w-1/2">
+                    <h2 class="font-playfair text-4xl font-bold mb-4">Moda que encanta e vende rápido</h2>
+                    <p class="text-gray-300 text-lg leading-relaxed">
+                        A Azzejo entrega coleções sofisticadas, de alto valor percebido, com margem ideal para revenda. Aposte em design, qualidade e exclusividade.
+                    </p>
                 </div>
             </div>
         </section>
 
-        <!-- Carousel Section -->
-        <section class="py-20 bg-gray-100">
-            <div class="container mx-auto px-6">
-                <!-- EDITÁVEL: Título da seção do carrossel -->
-                <h2 class="font-playfair text-4xl md:text-5xl font-bold text-center text-gray-800 mb-16">
-                    Nossa Coleção Exclusiva
-                </h2>
-                
-                <div class="carousel-container">
-                    <div id="carouselTrack" class="carousel-track">
-                        <!-- Carousel items will be generated by JavaScript -->
-                    </div>
-                </div>
+        <!-- Coleção -->
+        <section class="py-20 bg-[#111827]">
+            <h2 class="text-4xl font-playfair text-center font-bold mb-10">Nossa Coleção</h2>
+            <div class="carousel-container">
+                <div id="carouselTrack" class="carousel-track"></div>
             </div>
         </section>
 
-        <!-- WhatsApp CTA Section -->
-        <section class="py-20 bg-gradient-to-r from-green-400 to-blue-500">
-            <div class="container mx-auto px-6 text-center">
-                <!-- EDITÁVEL: Título da seção WhatsApp -->
-                <h2 class="font-playfair text-4xl md:text-5xl font-bold text-white mb-8">
-                    Pronta para começar?
-                </h2>
-                <!-- EDITÁVEL: Descrição da seção WhatsApp -->
-                <p class="text-xl text-white mb-8 max-w-2xl mx-auto">
-                    Entre em contato agora e descubra como a Azzejo pode transformar seu negócio de revenda!
-                </p>
-                
-                <!-- EDITÁVEL: Valor mínimo do pedido -->
-                <p class="text-lg md:text-xl font-medium bg-yellow-400 text-gray-900 px-6 py-3 rounded-full inline-block mb-8">
-                    Pedidos a partir de R$ 700,00
-                </p>
-                
-                <!-- 
-                EDITÁVEL: NÚMERO DO WHATSAPP
-                Substitua 5511999999999 pelo seu número real
-                Formato: 55 + DDD + número (sem espaços)
-                Exemplo: 5511987654321
-                -->
-                <a href="https://wa.me/5511999999999?text=Olá! Gostaria de saber mais sobre revenda Azzejo" 
-                   target="_blank" 
-                   class="whatsapp-btn inline-flex items-center px-8 py-4 rounded-full text-white font-semibold text-lg shadow-lg">
-                    <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+        <!-- WhatsApp CTA -->
+        <section class="py-20 bg-gradient-to-r from-[#1db954] to-[#1aa34a]">
+            <div class="text-center px-4">
+                <h2 class="font-playfair text-4xl md:text-5xl font-bold mb-4">Pronta para revender Azzejo?</h2>
+                <p class="text-white text-lg md:text-xl mb-6 max-w-xl mx-auto">Clique abaixo e fale com nosso time pelo WhatsApp.</p>
+                <a href="https://wa.me/5511999999999?text=Ol%C3%A1!%20Quero%20revender%20Azzejo" target="_blank" class="whatsapp-btn inline-flex items-center px-6 py-3 text-lg rounded-full">
+                    <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867..."/>
                     </svg>
-                    <!-- EDITÁVEL: Texto do botão WhatsApp -->
                     Falar no WhatsApp
                 </a>
             </div>
         </section>
 
-        <!-- Footer -->
-        <footer class="bg-gray-900 text-white py-12">
-            <div class="container mx-auto px-6 text-center">
-                <!-- EDITÁVEL: Nome da marca no footer -->
-                <h3 class="font-playfair text-3xl font-bold mb-4">Azzejo</h3>
-                <!-- EDITÁVEL: Descrição no footer -->
-                <p class="text-gray-400 mb-4">Moda feminina atacado para revendedoras exigentes</p>
-                <!-- EDITÁVEL: Copyright -->
-                <p class="text-sm text-gray-500">© 2025 Azzejo. Todos os direitos reservados.</p>
-            </div>
+        <!-- Rodapé -->
+        <footer class="bg-[#0f172a] py-10 text-center">
+            <h3 class="font-playfair text-3xl font-bold mb-2">Azzejo</h3>
+            <p class="text-gray-400">Moda Feminina de Alto Padrão para Revenda</p>
+            <p class="text-sm text-gray-600 mt-2">&copy; 2025 Azzejo. Todos os direitos reservados.</p>
         </footer>
     </div>
 
-    <script type="module">
-        // Splash screen functionality
-        window.addEventListener('load', function() {
-            setTimeout(function() {
-                const splashScreen = document.getElementById('splashScreen');
-                const mainContent = document.getElementById('mainContent');
-                
-                splashScreen.classList.add('fade-out');
-                
-                setTimeout(function() {
-                    splashScreen.style.display = 'none';
-                    mainContent.style.display = 'block';
+    <script>
+        window.addEventListener('load', function () {
+            setTimeout(() => {
+                document.getElementById('splashScreen').classList.add('fade-out');
+                setTimeout(() => {
+                    document.getElementById('splashScreen').style.display = 'none';
+                    document.getElementById('mainContent').style.display = 'block';
                     initializeCarousel();
                 }, 500);
             }, 1300);
         });
 
-        // Scroll to carousel function
-        window.scrollToCarousel = function() {
-            document.getElementById('carousel-section').scrollIntoView({ 
-                behavior: 'smooth' 
-            });
-        };
+        function scrollToCarousel() {
+            document.getElementById('carouselTrack').scrollIntoView({ behavior: 'smooth' });
+        }
 
-        // Carousel functionality (agora apenas por deslize)
-        
-        /* 
-        ========================================
-        EDITÁVEL: IMAGENS DO CARROSSEL
-        ========================================
-        Para usar suas próprias fotos, substitua os itens abaixo:
-        
-        OPÇÃO 1 - Usar URLs geradas automaticamente (atual):
-        Mantenha como está para gerar imagens automaticamente
-        
-        OPÇÃO 2 - Usar suas próprias fotos:
-        Substitua pelos caminhos das suas imagens, exemplo:
-        const clothingItems = [
-            './images/roupa1.jpg',
-            './images/roupa2.jpg',
-            './images/roupa3.jpg',
-            // ... continue até 10 imagens
-        ];
-        
-        OPÇÃO 3 - Misturar fotos suas com descrições:
-        const clothingItems = [
-            './images/minha-roupa1.jpg',
-            'Elegant%20evening%20dress%20on%20fashion%20model',
-            './images/minha-roupa2.jpg',
-            // ...
-        ];
-        */
         const clothingItems = [
             './images/foto1.jpg',
             './images/foto2.jpg',
@@ -307,28 +163,20 @@
             './images/foto5.jpg',
             './images/foto6.jpg',
             './images/foto7.jpg',
-            './images/foto8.jpg',
+            './images/foto8.jpg'
         ];
 
         function initializeCarousel() {
             const track = document.getElementById('carouselTrack');
-            
             clothingItems.forEach((item, index) => {
-                const carouselItem = document.createElement('div');
-                carouselItem.className = 'carousel-item';
-                
-                // Determina se é uma URL de imagem ou descrição para gerar
-                const imageSrc = item.startsWith('./') || item.startsWith('http') ? 
-                    item : `keys/clothing-${index}?prompt=${item}`;
-                
-                carouselItem.innerHTML = `
-                    <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
-                        <img src="${imageSrc}" 
-                             alt="Roupa ${index + 1}" 
-                             class="w-full h-96 object-cover">
+                const div = document.createElement('div');
+                div.className = 'carousel-item';
+                div.innerHTML = `
+                    <div class="bg-[#1f2937] rounded-xl overflow-hidden shadow-lg">
+                        <img src="${item}" alt="Look ${index + 1}" class="w-full h-80 object-cover">
                     </div>
                 `;
-                track.appendChild(carouselItem);
+                track.appendChild(div);
             });
         }
     </script>
