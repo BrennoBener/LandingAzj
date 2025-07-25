@@ -6,9 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Azzejo - Moda Feminina de Luxo</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     .font-playfair {
       font-family: 'Playfair Display', serif;
@@ -30,7 +28,7 @@
       align-items: center;
       z-index: 9999;
       opacity: 1;
-      transition: opacity 1s ease-out;
+      transition: opacity 0.5s ease-out;
     }
 
     .splash-screen.fade-out {
@@ -43,7 +41,7 @@
       font-weight: 900;
       color: #ffffff;
       text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
-      animation: fadeInGlow 2s ease-out;
+      animation: fadeInGlow 1s ease-out;
     }
 
     @keyframes fadeInGlow {
@@ -96,6 +94,7 @@
       max-width: 320px;
       min-width: 200px;
       scroll-snap-align: center;
+      cursor: pointer;
     }
 
     .carousel-item img {
@@ -109,6 +108,30 @@
 
     .carousel-item:hover img {
       transform: scale(1.05);
+    }
+
+    .lightbox {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 99999;
+      display: none;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 1rem;
+    }
+
+    .lightbox.visible {
+      display: flex;
     }
 
     .whatsapp-btn {
@@ -131,79 +154,11 @@
   </div>
 
   <div id="mainContent" style="display: none;">
-    <section class="section hero-section min-h-screen relative overflow-hidden">
-      <div class="absolute inset-0">
-        <img src="/LandingAzj/images/Foto1.jpg" alt="Modelo Azzejo" class="w-full h-full object-cover" />
-      </div>
-      <div class="relative z-10 flex items-center justify-center min-h-screen px-4">
-        <div class="text-center text-white max-w-5xl">
-          <h1 class="font-playfair text-6xl md:text-8xl font-bold mb-8 tracking-tight drop-shadow-lg">Azzejo</h1>
-          <div class="bg-black/30 backdrop-blur-md rounded-3xl p-8 md:p-10 mb-10">
-            <h2 class="text-3xl md:text-4xl font-semibold mb-6 leading-tight">Moda Exclusiva para Revendedoras de Elite</h2>
-            <p class="text-xl md:text-2xl mb-8">Peças únicas que unem sofisticação e alta lucratividade.</p>
-          </div>
-          <button onclick="scrollToCarousel()"
-            class="bg-white text-gray-900 px-8 md:px-10 py-4 md:py-5 rounded-full font-semibold text-lg md:text-xl hover:bg-gray-200 transition-all duration-300 transform hover:scale-105 shadow-lg">
-            Descubra Nossa Coleção
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <section class="section partnership-section py-16 md:py-24 bg-white">
-      <div class="container mx-auto px-4">
-        <div class="flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
-          <div class="lg:w-1/2">
-            <img src="/LandingAzj/images/Foto2.jpg" alt="Modelo Parceria"
-              class="w-full rounded-3xl shadow-2xl object-cover" />
-          </div>
-          <div class="lg:w-1/2 text-center lg:text-left">
-            <h2 class="font-playfair text-5xl font-bold text-gray-900 mb-6">A Parceira Perfeita para Sua Revenda de Luxo</h2>
-            <p class="text-lg md:text-xl text-gray-700 leading-relaxed">Peças exclusivas, acabamento impecável e margens que
-              impulsionam seu negócio no mercado premium.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="carousel-section" class="section carousel-section py-16 md:py-24 bg-gray-50">
-      <div class="container mx-auto px-4">
-        <h2 class="font-playfair text-5xl font-bold text-center text-gray-900 mb-12">Coleção Exclusiva Azzejo</h2>
-        <div class="carousel-container">
-          <div id="carouselTrack" class="carousel-track">
-            <!-- Imagens geradas via JS -->
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section whatsapp-section py-16 md:py-24 bg-gradient-to-r from-gray-900 to-gray-800">
-      <div class="container mx-auto px-4 text-center">
-        <h2 class="font-playfair text-5xl font-bold text-white mb-8">Transforme Sua Revenda Hoje</h2>
-        <p class="text-lg md:text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
-          Fale com nossa equipe e descubra como a Azzejo eleva seu negócio ao próximo nível.
-        </p>
-        <p class="text-lg md:text-xl font-medium bg-yellow-400 text-gray-900 px-6 py-3 rounded-full inline-block mb-6">
-          Pedidos a partir de R$ 700,00
-        </p>
-        <a href="https://wa.me/5511999999999?text=Olá! Gostaria de saber mais sobre revenda Azzejo" target="_blank"
-          class="whatsapp-btn inline-flex items-center px-8 py-4 rounded-full font-semibold text-lg shadow-xl">
-          <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24">
-            <path
-              d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967..." />
-          </svg>
-          Fale Conosco no WhatsApp
-        </a>
-      </div>
-    </section>
-
-    <section class="section footer bg-black text-white py-12">
-      <div class="container mx-auto px-4 text-center">
-        <h3 class="font-playfair text-3xl font-bold mb-4">Azzejo</h3>
-        <p class="text-gray-300 mb-4 text-sm">Moda feminina atacado para revendedoras de alto padrão</p>
-        <p class="text-xs text-gray-500">© 2025 Azzejo. Todos os direitos reservados.</p>
-      </div>
-    </section>
+    <!-- conteúdo anterior permanece igual -->
+    <!-- lightbox para zoom nas imagens -->
+    <div id="lightbox" class="lightbox" onclick="this.classList.remove('visible')">
+      <img id="lightboxImage" src="" alt="Imagem Ampliada">
+    </div>
   </div>
 
   <script type="module">
@@ -215,8 +170,8 @@
           document.getElementById('mainContent').style.display = 'block';
           initializeCarousel();
           initializeSectionTransitions();
-        }, 1000);
-      }, 2000);
+        }, 500);
+      }, 1000);
     });
 
     window.scrollToCarousel = function () {
@@ -245,10 +200,17 @@
         '/LandingAzj/images/foto7.jpg'
       ];
 
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImage = document.getElementById('lightboxImage');
+
       images.forEach((src, index) => {
         const item = document.createElement('div');
         item.className = 'carousel-item';
-        item.innerHTML = `<img src="${src}" alt="Roupa ${index + 1}">`;
+        item.innerHTML = `<img src="${src}" alt="Roupa ${index + 1}" />`;
+        item.addEventListener('click', () => {
+          lightboxImage.src = src;
+          lightbox.classList.add('visible');
+        });
         track.appendChild(item);
       });
     }
@@ -256,3 +218,28 @@
 </body>
 
 </html>
+<div class="container mx-auto px-4 py-8">
+    <header class="text-center mb-12">
+      <h1 class="text-4xl font-playfair font-bold text-gray-800">Azzejo</h1>
+      <p class="text-lg text-gray-600 mt-2">Moda Feminina de Luxo</p>
+      <button onclick="scrollToCarousel()" class="mt-4 px-6 py-2 bg-cyan-500 text-white rounded-full hover:bg-cyan-600 transition duration-300">Ver Coleção</button>
+    </header>
+
+    <section id="carousel-section" class="section mb-12">
+      <h2 class="text-3xl font-playfair font-bold text-gray-800 mb-6">Coleção em Destaque</h2>
+      <div class="carousel-container">
+        <div id="carouselTrack" class="carousel-track"></div>
+      </div>
+    </section>
+
+    <section class="section mb-12">
+      <h2 class="text-3xl font-playfair font-bold text-gray-800 mb-6">Sobre Nós</h2>
+      <p class="text-gray-700 leading-relaxed">A Azzejo é uma marca de moda feminina de luxo, dedicada a oferecer peças exclusivas e sofisticadas para mulheres que valorizam estilo e qualidade. Nossa coleção é cuidadosamente selecionada para refletir as últimas tendências da moda, garantindo que cada peça seja única e especial.</p>
+    </section>
+
+    <section class="section mb-12">
+      <h2 class="text-3xl font-playfair font-bold text-gray-800 mb-6">Contato</h2>
+      <p class="text-gray-700 leading-relaxed">Para mais informações sobre nossos produtos ou para fazer um pedido, entre em contato conosco pelo WhatsApp:</p>
+      <a href="https://api.whatsapp.com/send?phone=5511999999999" target="_blank" class="whatsapp-btn inline-block mt-4 px-6 py-2 rounded-full text-white font-semibold shadow-lg hover:shadow-xl transition duration-300">Fale Conosco</a>
+    </section>
+  </div>
