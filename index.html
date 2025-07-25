@@ -5,12 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Azzejo - Moda Feminina Atacado</title>
-    <!-- 
-    CONFIGURAÇÕES GERAIS EDITÁVEIS
-    - Substitua as imagens nas pastas 'images' e atualize os caminhos nos comentários abaixo.
-    - Edite textos marcados com comentários para personalizar o conteúdo.
-    - Ajuste cores no Tailwind ou no CSS personalizado para combinar com sua marca.
-    -->
+    <!-- CONFIGURAÇÕES GERAIS EDITÁVEIS -->
+    <!-- Substitua as imagens nas pastas 'images' e atualize os caminhos nos comentários abaixo. -->
+    <!-- Edite textos marcados com comentários para personalizar o conteúdo. -->
+    <!-- Ajuste cores no Tailwind ou no CSS personalizado para combinar com sua marca. -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -81,14 +79,29 @@
 
         .carousel-track {
             display: flex;
+            gap: 1rem;
             padding: 0 0.5rem;
+            transition: transform 0.3s ease-out;
         }
 
         .carousel-item {
-            flex: 0 0 80vw;
+            flex: 0 0 70vw;
             max-width: 320px;
-            margin-right: 1rem;
             scroll-snap-align: start;
+            transform: translateZ(0); /* Otimização para desempenho */
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .carousel-item:hover img {
+            transform: scale(1.05);
         }
 
         /* Image Overlay for Hero */
@@ -111,99 +124,32 @@
 
         /* Responsive Adjustments */
         @media (max-width: 640px) {
-            .logo-animation {
-                font-size: 3rem;
-            }
-
-            .hero-section h1 {
-                font-size: 3rem;
-            }
-
-            .hero-section h2 {
-                font-size: 1.5rem;
-            }
-
-            .hero-section p {
-                font-size: 1rem;
-            }
-
-            .hero-section button {
-                padding: 0.75rem 1.5rem;
-                font-size: 0.875rem;
-            }
-
-            .partnership-section h2 {
-                font-size: 2.5rem;
-            }
-
-            .partnership-section p {
-                font-size: 1rem;
-            }
-
-            .carousel-section h2 {
-                font-size: 2.5rem;
-            }
-
-            .carousel-item {
-                flex: 0 0 70vw;
-                max-width: 250px;
-            }
-
-            .whatsapp-section h2 {
-                font-size: 2.5rem;
-            }
-
-            .whatsapp-section p {
-                font-size: 1rem;
-            }
-
-            .whatsapp-btn {
-                padding: 0.75rem 1.5rem;
-                font-size: 0.875rem;
-            }
-
-            .whatsapp-btn svg {
-                width: 1.25rem;
-                height: 1.25rem;
-            }
-
-            .footer h3 {
-                font-size: 2rem;
-            }
-
-            .footer p {
-                font-size: 0.875rem;
-            }
+            .logo-animation { font-size: 3rem; }
+            .hero-section h1 { font-size: 3rem; }
+            .hero-section h2 { font-size: 1.5rem; }
+            .hero-section p { font-size: 1rem; }
+            .hero-section button { padding: 0.75rem 1.5rem; font-size: 0.875rem; }
+            .partnership-section h2 { font-size: 2.5rem; }
+            .partnership-section p { font-size: 1rem; }
+            .carousel-section h2 { font-size: 2.5rem; }
+            .carousel-item { flex: 0 0 70vw; max-width: 250px; }
+            .carousel-item img { height: 200px; }
+            .whatsapp-section h2 { font-size: 2.5rem; }
+            .whatsapp-section p { font-size: 1rem; }
+            .whatsapp-btn { padding: 0.75rem 1.5rem; font-size: 0.875rem; }
+            .whatsapp-btn svg { width: 1.25rem; height: 1.25rem; }
+            .footer h3 { font-size: 2rem; }
+            .footer p { font-size: 0.875rem; }
         }
 
         @media (min-width: 641px) and (max-width: 1024px) {
-            .logo-animation {
-                font-size: 4rem;
-            }
-
-            .hero-section h1 {
-                font-size: 5rem;
-            }
-
-            .hero-section h2 {
-                font-size: 2rem;
-            }
-
-            .hero-section p {
-                font-size: 1.25rem;
-            }
-
-            .partnership-section h2 {
-                font-size: 3.5rem;
-            }
-
-            .carousel-section h2 {
-                font-size: 3.5rem;
-            }
-
-            .whatsapp-section h2 {
-                font-size: 3.5rem;
-            }
+            .logo-animation { font-size: 4rem; }
+            .hero-section h1 { font-size: 5rem; }
+            .hero-section h2 { font-size: 2rem; }
+            .hero-section p { font-size: 1.25rem; }
+            .partnership-section h2 { font-size: 3.5rem; }
+            .carousel-section h2 { font-size: 3.5rem; }
+            .whatsapp-section h2 { font-size: 3.5rem; }
         }
     </style>
 </head>
@@ -220,14 +166,11 @@
         <!-- Hero Section -->
         <section class="section hero-section min-h-screen relative overflow-hidden">
             <div class="absolute inset-0 hero-overlay">
-                <!-- 
-                EDITÁVEL: IMAGEM PRINCIPAL DO HERO
-                - Substitua o src pelo caminho da sua imagem na pasta 'images'.
-                - Exemplo: './images/sua-imagem-hero.jpg'
-                - Ou use uma URL externa: 'https://exemplo.com/sua-imagem.jpg'
-                - Certifique-se de que a imagem existe e o nome corresponde exatamente.
-                -->
-                <img src="./images/Foto1.jpg" 
+                <!-- EDITÁVEL: IMAGEM PRINCIPAL DO HERO -->
+                <!-- Substitua o src pelo caminho da sua imagem na pasta 'images'. -->
+                <!-- Exemplo: '/LandingAzj/images/Foto1.jpg' -->
+                <!-- Certifique-se de que a imagem existe e o nome corresponde exatamente. -->
+                <img src="/LandingAzj/images/Foto1.jpg" 
                      alt="Modelo Azzejo" 
                      class="w-full h-full object-cover">
             </div>
@@ -263,14 +206,11 @@
             <div class="container mx-auto px-4">
                 <div class="flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
                     <div class="lg:w-1/2">
-                        <!-- 
-                        EDITÁVEL: IMAGEM DA SEÇÃO PARCERIA
-                        - Substitua o src pelo caminho da sua imagem na pasta 'images'.
-                        - Exemplo: './images/sua-imagem-parceria.jpg'
-                        - Ou use uma URL externa: 'https://exemplo.com/sua-imagem.jpg'
-                        - Certifique-se de que a imagem existe e o nome corresponde exatamente.
-                        -->
-                        <img src="./images/Foto2.jpg" 
+                        <!-- EDITÁVEL: IMAGEM DA SEÇÃO PARCERIA -->
+                        <!-- Substitua o src pelo caminho da sua imagem na pasta 'images'. -->
+                        <!-- Exemplo: '/LandingAzj/images/Foto2.jpg' -->
+                        <!-- Certifique-se de que a imagem existe e o nome corresponde exatamente. -->
+                        <img src="/LandingAzj/images/Foto2.jpg" 
                              alt="Modelo Parceria" 
                              class="w-full rounded-3xl shadow-2xl object-cover">
                     </div>
@@ -316,24 +256,21 @@
                 <p class="text-lg md:text-xl text-gray-200 mb-8 md:mb-10 max-w-3xl mx-auto">
                     Fale com nossa equipe e descubra como a Azzejo eleva seu negócio ao próximo nível.
                 </p>
-                <!-- EDITÁVEL: Valor mínimo do pedido -->
-                <p class="text-lg md:text-xl font-medium bg-yellow-400 text-gray-900 px-6 md:px-8 py-3 md:py-4 rounded-full inline-block mb-8">
+                <!-- EDITÁVEL: Valor mínimo do pedido (movido acima do botão) -->
+                <p class="text-lg md:text-xl font-medium bg-yellow-400 text-gray-900 px-6 md:px-8 py-3 md:py-4 rounded-full inline-block mb-6">
                     Pedidos a partir de R$ 700,00
                 </p>
                 
-                <!-- 
-                EDITÁVEL: NÚMERO DO WHATSAPP
-                - Substitua 5511999999999 pelo número real.
-                - Formato: 55 + DDD + número (sem espaços ou caracteres especiais).
-                - Exemplo: 5511987654321
-                -->
+                <!-- EDITÁVEL: NÚMERO DO WHATSAPP -->
+                <!-- Substitua 5511999999999 pelo número real. -->
+                <!-- Formato: 55 + DDD + número (sem espaços ou caracteres especiais). -->
+                <!-- Exemplo: 5511987654321 -->
                 <a href="https://wa.me/5511999999999?text=Olá! Gostaria de saber mais sobre revenda Azzejo" 
                    target="_blank" 
                    class="whatsapp-btn inline-flex items-center px-8 md:px-10 py-4 md:py-5 rounded-full font-semibold text-lg md:text-xl shadow-xl">
                     <svg class="w-6 md:w-7 h-6 md:h-7 mr-3" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
                     </svg>
-                    <!-- EDITÁVEL: Texto do botão WhatsApp -->
                     Fale Conosco no WhatsApp
                 </a>
             </div>
@@ -372,7 +309,7 @@
 
         // Scroll to carousel function
         window.scrollToCarousel = function() {
-            console.log('Botão "Descubra Nossa Coleção" clicado'); // Debug
+            console.log('Botão "Descubra Nossa Coleção" clicado');
             const carouselSection = document.getElementById('carousel-section');
             if (carouselSection) {
                 carouselSection.scrollIntoView({ 
@@ -402,21 +339,17 @@
         function initializeCarousel() {
             const track = document.getElementById('carouselTrack');
             
-            /* 
-            EDITÁVEL: IMAGENS DO CARROSSEL
-            - Substitua os caminhos abaixo pelos das suas imagens na pasta 'images'.
-            - Exemplo: './images/sua-imagem1.jpg'
-            - Ou use URLs externas: 'https://exemplo.com/sua-imagem1.jpg'
-            - Certifique-se de que as imagens existem e os nomes correspondem exatamente.
-            - Mantenha 6 imagens para um carrossel completo, ou ajuste a quantidade conforme necessário.
-            */
+            /* EDITÁVEL: IMAGENS DO CARROSSEL */
+            /* Substitua os caminhos abaixo pelos das suas imagens na pasta 'images'. */
+            /* Exemplo: '/LandingAzj/images/foto3.jpg' */
+            /* Certifique-se de que as imagens existem e os nomes correspondem exatamente. */
             const clothingItems = [
-                './images/foto3.jpg',
-                './images/foto4.jpg',
-                './images/foto5.jpg',
-                './images/foto6.jpg',
-                './images/foto7.jpg',
-                './images/foto8.jpg'
+                '/LandingAzj/images/foto3.jpg',
+                '/LandingAzj/images/foto4.jpg',
+                '/LandingAzj/images/foto5.jpg',
+                '/LandingAzj/images/foto6.jpg',
+                '/LandingAzj/images/foto7.jpg',
+                '/LandingAzj/images/foto8.jpg'
             ];
 
             clothingItems.forEach((item, index) => {
@@ -424,18 +357,19 @@
                 carouselItem.className = 'carousel-item';
                 
                 carouselItem.innerHTML = `
-                    <div class="bg-white rounded-3xl shadow-xl overflow-hidden transform hover:scale-105 transition-transform duration-300">
+                    <div class="bg-white rounded-3xl shadow-xl overflow-hidden">
                         <img src="${item}" 
                              alt="Roupa ${index + 1}" 
-                             class="w-full h-80 sm:h-96 object-cover">
+                             class="w-full h-80 sm:h-96 object-cover transition-transform duration-300">
                     </div>
                 `;
                 track.appendChild(carouselItem);
             });
 
-            // Drag functionality for carousel
             let isDragging = false;
-            let startX, scrollLeft;
+            let startX = 0;
+            let currentX = 0;
+            let scrollLeft = 0;
 
             track.addEventListener('mousedown', (e) => {
                 isDragging = true;
@@ -444,9 +378,12 @@
                 track.style.cursor = 'grabbing';
             });
 
-            track.addEventListener('mouseleave', () => {
-                isDragging = false;
-                track.style.cursor = 'grab';
+            track.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                e.preventDefault();
+                currentX = e.pageX - track.offsetLeft;
+                const walk = (currentX - startX) * 1.5; // Ajuste da velocidade
+                track.scrollLeft = scrollLeft - walk;
             });
 
             track.addEventListener('mouseup', () => {
@@ -454,31 +391,30 @@
                 track.style.cursor = 'grab';
             });
 
-            track.addEventListener('mousemove', (e) => {
-                if (!isDragging) return;
-                e.preventDefault();
-                const x = e.pageX - track.offsetLeft;
-                const walk = (x - startX) * 2;
-                track.scrollLeft = scrollLeft - walk;
+            track.addEventListener('mouseleave', () => {
+                isDragging = false;
+                track.style.cursor = 'grab';
             });
 
-            // Touch support for mobile
+            // Touch events for mobile
             track.addEventListener('touchstart', (e) => {
                 isDragging = true;
                 startX = e.touches[0].pageX - track.offsetLeft;
                 scrollLeft = track.scrollLeft;
-            });
-
-            track.addEventListener('touchend', () => {
-                isDragging = false;
+                track.style.transition = 'none'; // Desativa transição durante o toque
             });
 
             track.addEventListener('touchmove', (e) => {
                 if (!isDragging) return;
                 e.preventDefault();
-                const x = e.touches[0].pageX - track.offsetLeft;
-                const walk = (x - startX) * 2;
+                currentX = e.touches[0].pageX - track.offsetLeft;
+                const walk = (currentX - startX) * 1.5; // Velocidade ajustada
                 track.scrollLeft = scrollLeft - walk;
+            });
+
+            track.addEventListener('touchend', () => {
+                isDragging = false;
+                track.style.transition = 'transform 0.3s ease-out'; // Reativa transição suave
             });
         }
     </script>
