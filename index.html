@@ -8,7 +8,6 @@
     <!-- CONFIGURAÇÕES GERAIS EDITÁVEIS -->
     <!-- Substitua as imagens nas pastas 'images' e atualize os caminhos nos comentários abaixo. -->
     <!-- Edite textos marcados com comentários para personalizar o conteúdo. -->
-    <!-- Ajuste cores no Tailwind ou no CSS personalizado para combinar com sua marca. -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -66,6 +65,9 @@
         .carousel-container {
             position: relative;
             overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .carousel-track {
@@ -78,7 +80,7 @@
         .carousel-item {
             flex: 0 0 70vw;
             max-width: 320px;
-            scroll-snap-align: start;
+            scroll-snap-align: center;
             transform: translateZ(0);
         }
 
@@ -89,6 +91,7 @@
             border-radius: 1rem;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease;
+            cursor: pointer;
         }
 
         .carousel-item:hover img {
@@ -118,6 +121,76 @@
 
         .carousel-next {
             right: 0.5rem;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90vh;
+            position: relative;
+        }
+
+        .modal-img {
+            width: 100%;
+            height: auto;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 1rem;
+        }
+
+        .modal-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
+            border: none;
+            padding: 1rem;
+            cursor: pointer;
+            z-index: 10001;
+            transition: background 0.3s ease;
+        }
+
+        .modal-button:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .modal-prev {
+            left: 1rem;
+        }
+
+        .modal-next {
+            right: 1rem;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            border-radius: 0.5rem;
+            transition: background 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.5);
         }
 
         /* Image Overlay for Hero */
@@ -157,6 +230,7 @@
             .footer h3 { font-size: 2rem; }
             .footer p { font-size: 0.875rem; }
             .carousel-button { padding: 0.5rem; }
+            .modal-img { max-height: 80vh; }
         }
 
         @media (min-width: 641px) and (max-width: 1024px) {
@@ -314,6 +388,24 @@
                 <p class="text-xs md:text-sm text-gray-500">© 2025 Azzejo. Todos os direitos reservados.</p>
             </div>
         </section>
+
+        <!-- Modal -->
+        <div id="modal" class="modal fixed inset-0 flex items-center justify-center">
+            <div class="modal-content">
+                <img id="modal-img" class="modal-img" src="" alt="Imagem Ampliada">
+                <button class="modal-button modal-prev" onclick="changeModalImage(-1)">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                    </svg>
+                </button>
+                <button class="modal-button modal-next" onclick="changeModalImage(1)">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </button>
+                <button class="modal-close" onclick="closeModal()">Voltar</button>
+            </div>
+        </div>
     </div>
 
     <script type="module">
@@ -371,7 +463,7 @@
             /* Substitua os caminhos abaixo pelos das suas imagens na pasta 'images'. */
             /* Exemplo: '/LandingAzj/images/foto3.jpg' */
             /* Certifique-se de que as imagens existem e os nomes correspondem exatamente. */
-            const clothingItems = [
+            const carouselItems = [
                 '/LandingAzj/images/foto3.jpg',
                 '/LandingAzj/images/foto4.jpg',
                 '/LandingAzj/images/foto5.jpg',
@@ -380,10 +472,24 @@
                 '/LandingAzj/images/foto8.jpg'
             ];
 
+            /* EDITÁVEL: IMAGENS ADICIONAIS PARA A MODAL */
+            /* Adicione variações das roupas ou fotos extras aqui. */
+            /* Exemplo: '/LandingAzj/images/extra1.jpg' */
+            const modalItems = [
+                '/LandingAzj/images/foto3.jpg', // Variação 1 da foto3
+                '/LandingAzj/images/foto4.jpg', // Variação 1 da foto4
+                '/LandingAzj/images/foto5.jpg', // Variação 1 da foto5
+                '/LandingAzj/images/foto6.jpg', // Variação 1 da foto6
+                '/LandingAzj/images/foto7.jpg', // Variação 1 da foto7
+                '/LandingAzj/images/foto8.jpg'  // Variação 1 da foto8
+                // Adicione mais variações conforme necessário
+            ];
+
             let currentIndex = 0;
+            let modalIndex = 0;
             const itemWidth = 70; // Porcentagem da largura do item (70vw)
 
-            clothingItems.forEach((item, index) => {
+            carouselItems.forEach((item, index) => {
                 const carouselItem = document.createElement('div');
                 carouselItem.className = 'carousel-item';
                 
@@ -391,23 +497,46 @@
                     <div class="bg-white rounded-3xl shadow-xl overflow-hidden">
                         <img src="${item}" 
                              alt="Roupa ${index + 1}" 
-                             class="w-full h-80 sm:h-96 object-cover transition-transform duration-300">
+                             class="w-full h-80 sm:h-96 object-cover transition-transform duration-300"
+                             onclick="openModal(${index})">
                     </div>
                 `;
                 track.appendChild(carouselItem);
             });
 
             function updateCarousel() {
-                const totalItems = clothingItems.length;
+                const totalItems = carouselItems.length;
+                currentIndex = Math.max(0, Math.min(currentIndex, totalItems - 1));
                 const translateX = -((currentIndex * itemWidth) / 100) * (container.offsetWidth / (itemWidth / 100));
                 track.style.transform = `translateX(${translateX}px)`;
             }
 
-            // Botões de navegação
+            // Botões de navegação do carrossel
             window.scrollCarousel = function(direction) {
-                const totalItems = clothingItems.length;
-                currentIndex = (currentIndex + direction + totalItems) % totalItems;
+                const totalItems = carouselItems.length;
+                currentIndex += direction;
                 updateCarousel();
+            };
+
+            // Modal functionality
+            window.openModal = function(index) {
+                modalIndex = index;
+                const modal = document.getElementById('modal');
+                const modalImg = document.getElementById('modal-img');
+                modalImg.src = carouselItems[modalIndex];
+                modal.style.display = 'flex';
+            };
+
+            window.changeModalImage = function(direction) {
+                const totalModalItems = modalItems.length;
+                modalIndex = (modalIndex + direction + totalModalItems) % totalModalItems;
+                const modalImg = document.getElementById('modal-img');
+                modalImg.src = modalItems[modalIndex];
+            };
+
+            window.closeModal = function() {
+                const modal = document.getElementById('modal');
+                modal.style.display = 'none';
             };
 
             // Deslize com toque
@@ -420,7 +549,7 @@
                 isDragging = true;
                 startX = e.touches[0].clientX;
                 startScroll = track.scrollLeft;
-                track.style.transition = 'none'; // Desativa transição durante o toque
+                track.style.transition = 'none';
             });
 
             track.addEventListener('touchmove', (e) => {
@@ -433,12 +562,12 @@
 
             track.addEventListener('touchend', () => {
                 isDragging = false;
-                track.style.transition = 'transform 0.3s ease-out'; // Reativa transição suave
+                track.style.transition = 'transform 0.3s ease-out';
                 const diff = startX - currentX;
-                if (Math.abs(diff) > 50) { // Limiar para mudar de item
+                if (Math.abs(diff) > 50) {
                     scrollCarousel(diff > 0 ? 1 : -1);
                 } else {
-                    updateCarousel(); // Corrige a posição se o deslize for pequeno
+                    updateCarousel();
                 }
             });
 
