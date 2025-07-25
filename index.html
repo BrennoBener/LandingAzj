@@ -8,7 +8,6 @@
     <!-- CONFIGURAÇÕES GERAIS EDITÁVEIS -->
     <!-- Substitua as imagens nas pastas 'images' e atualize os caminhos nos comentários abaixo. -->
     <!-- Edite textos marcados com comentários para personalizar o conteúdo. -->
-    <!-- Ajuste cores no Tailwind ou no CSS personalizado para combinar com sua marca. -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -66,26 +65,31 @@
         .carousel-container {
             position: relative;
             overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem 0;
         }
 
         .carousel-track {
             display: flex;
             gap: 1rem;
-            padding: 0 0.5rem;
-            transition: transform 0.3s ease-out;
+            transition: transform 0.5s ease-in-out;
         }
 
         .carousel-item {
             flex: 0 0 70vw;
             max-width: 320px;
-            scroll-snap-align: start;
-            transform: translateZ(0);
+            min-width: 200px;
+            height: 100%;
+            scroll-snap-align: center;
         }
 
         .carousel-item img {
             width: 100%;
-            height: 300px;
-            object-fit: cover;
+            height: 100%;
+            max-height: 400px;
+            object-fit: contain;
             border-radius: 1rem;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease;
@@ -149,7 +153,7 @@
             .partnership-section p { font-size: 1rem; }
             .carousel-section h2 { font-size: 2.5rem; }
             .carousel-item { flex: 0 0 70vw; max-width: 250px; }
-            .carousel-item img { height: 200px; }
+            .carousel-item img { max-height: 250px; }
             .whatsapp-section h2 { font-size: 2.5rem; }
             .whatsapp-section p { font-size: 1rem; }
             .whatsapp-btn { padding: 0.75rem 1.5rem; font-size: 0.875rem; }
@@ -186,7 +190,6 @@
                 <!-- EDITÁVEL: IMAGEM PRINCIPAL DO HERO -->
                 <!-- Substitua o src pelo caminho da sua imagem na pasta 'images'. -->
                 <!-- Exemplo: '/LandingAzj/images/Foto1.jpg' -->
-                <!-- Certifique-se de que a imagem existe e o nome corresponde exatamente. -->
                 <img src="/LandingAzj/images/Foto1.jpg" 
                      alt="Modelo Azzejo" 
                      class="w-full h-full object-cover">
@@ -226,7 +229,6 @@
                         <!-- EDITÁVEL: IMAGEM DA SEÇÃO PARCERIA -->
                         <!-- Substitua o src pelo caminho da sua imagem na pasta 'images'. -->
                         <!-- Exemplo: '/LandingAzj/images/Foto2.jpg' -->
-                        <!-- Certifique-se de que a imagem existe e o nome corresponde exatamente. -->
                         <img src="/LandingAzj/images/Foto2.jpg" 
                              alt="Modelo Parceria" 
                              class="w-full rounded-3xl shadow-2xl object-cover">
@@ -371,7 +373,7 @@
             /* Substitua os caminhos abaixo pelos das suas imagens na pasta 'images'. */
             /* Exemplo: '/LandingAzj/images/foto3.jpg' */
             /* Certifique-se de que as imagens existem e os nomes correspondem exatamente. */
-            const clothingItems = [
+            const carouselItems = [
                 '/LandingAzj/images/foto3.jpg',
                 '/LandingAzj/images/foto4.jpg',
                 '/LandingAzj/images/foto5.jpg',
@@ -381,45 +383,43 @@
             ];
 
             let currentIndex = 0;
-            const itemWidth = 70; // Porcentagem da largura do item (70vw)
+            const totalItems = carouselItems.length;
 
-            clothingItems.forEach((item, index) => {
+            // Criar itens do carrossel
+            carouselItems.forEach((item, index) => {
                 const carouselItem = document.createElement('div');
                 carouselItem.className = 'carousel-item';
                 
                 carouselItem.innerHTML = `
-                    <div class="bg-white rounded-3xl shadow-xl overflow-hidden">
-                        <img src="${item}" 
-                             alt="Roupa ${index + 1}" 
-                             class="w-full h-80 sm:h-96 object-cover transition-transform duration-300">
-                    </div>
+                    <img src="${item}" 
+                         alt="Roupa ${index + 1}" 
+                         class="w-full h-full object-contain">
                 `;
                 track.appendChild(carouselItem);
             });
 
+            // Ajustar largura total do track
+            track.style.width = `${totalItems * 70}vw`;
+
             function updateCarousel() {
-                const totalItems = clothingItems.length;
-                const translateX = -((currentIndex * itemWidth) / 100) * (container.offsetWidth / (itemWidth / 100));
+                const translateX = -((currentIndex * 70) / 100) * (container.offsetWidth / (70 / 100));
                 track.style.transform = `translateX(${translateX}px)`;
             }
 
-            // Botões de navegação
+            // Botões de navegação com loop
             window.scrollCarousel = function(direction) {
-                const totalItems = clothingItems.length;
                 currentIndex = (currentIndex + direction + totalItems) % totalItems;
                 updateCarousel();
             };
 
-            // Deslize com toque
+            // Deslize com toque com loop
             let isDragging = false;
             let startX = 0;
             let currentX = 0;
-            let startScroll = 0;
 
             track.addEventListener('touchstart', (e) => {
                 isDragging = true;
                 startX = e.touches[0].clientX;
-                startScroll = track.scrollLeft;
                 track.style.transition = 'none'; // Desativa transição durante o toque
             });
 
@@ -427,19 +427,16 @@
                 if (!isDragging) return;
                 e.preventDefault();
                 currentX = e.touches[0].clientX;
-                const diff = startX - currentX;
-                track.style.transform = `translateX(${startScroll - diff}px)`;
+                const diff = (startX - currentX) / (container.offsetWidth / 70); // Converte para índice
+                const newIndex = Math.round(currentIndex - diff);
+                currentIndex = (newIndex + totalItems) % totalItems;
+                updateCarousel();
             });
 
             track.addEventListener('touchend', () => {
                 isDragging = false;
-                track.style.transition = 'transform 0.3s ease-out'; // Reativa transição suave
-                const diff = startX - currentX;
-                if (Math.abs(diff) > 50) { // Limiar para mudar de item
-                    scrollCarousel(diff > 0 ? 1 : -1);
-                } else {
-                    updateCarousel(); // Corrige a posição se o deslize for pequeno
-                }
+                track.style.transition = 'transform 0.5s ease-in-out'; // Reativa transição suave
+                updateCarousel();
             });
 
             // Inicializa o carrossel
