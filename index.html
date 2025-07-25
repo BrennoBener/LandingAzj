@@ -2,447 +2,257 @@
 <html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Azzejo - Moda Feminina Atacado</title>
-    <!-- CONFIGURAÇÕES GERAIS EDITÁVEIS -->
-    <!-- Substitua as imagens nas pastas 'images' e atualize os caminhos nos comentários abaixo. -->
-    <!-- Edite textos marcados com comentários para personalizar o conteúdo. -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        .font-playfair { font-family: 'Playfair Display', serif; }
-        .font-inter { font-family: 'Inter', sans-serif; }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Azzejo - Moda Feminina de Luxo</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    .font-playfair {
+      font-family: 'Playfair Display', serif;
+    }
 
-        /* Splash Screen */
-        .splash-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #000000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            opacity: 1;
-            transition: opacity 1s ease-out;
-        }
+    .font-inter {
+      font-family: 'Inter', sans-serif;
+    }
 
-        .splash-screen.fade-out {
-            opacity: 0;
-            pointer-events: none;
-        }
+    .splash-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #000000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      opacity: 1;
+      transition: opacity 1s ease-out;
+    }
 
-        .logo-animation {
-            font-size: 5rem;
-            font-weight: 900;
-            color: #ffffff;
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
-            animation: fadeInGlow 2s ease-out;
-        }
+    .splash-screen.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
 
-        @keyframes fadeInGlow {
-            0% { opacity: 0; transform: scale(0.5); text-shadow: 0 0 0 rgba(255, 255, 255, 0); }
-            50% { opacity: 1; transform: scale(1.1); text-shadow: 0 0 20px rgba(255, 255, 255, 0.7); }
-            100% { opacity: 1; transform: scale(1); text-shadow: 0 0 10px rgba(255, 255, 255, 0.3); }
-        }
+    .logo-animation {
+      font-size: 5rem;
+      font-weight: 900;
+      color: #ffffff;
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+      animation: fadeInGlow 2s ease-out;
+    }
 
-        /* Section Transitions */
-        .section {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
+    @keyframes fadeInGlow {
+      0% {
+        opacity: 0;
+        transform: scale(0.5);
+        text-shadow: 0 0 0 rgba(255, 255, 255, 0);
+      }
 
-        .section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+      50% {
+        opacity: 1;
+        transform: scale(1.1);
+        text-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
+      }
 
-        /* Carousel */
-        .carousel-container {
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 1rem 0;
-        }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+      }
+    }
 
-        .carousel-track {
-            display: flex;
-            gap: 1rem;
-            transition: transform 0.5s ease-in-out;
-        }
+    .section {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
 
-        .carousel-item {
-            flex: 0 0 70vw;
-            max-width: 320px;
-            min-width: 200px;
-            height: 100%;
-            scroll-snap-align: center;
-        }
+    .section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-        .carousel-item img {
-            width: 100%;
-            height: 100%;
-            max-height: 400px;
-            object-fit: contain;
-            border-radius: 1rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-        }
+    .carousel-container {
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
 
-        .carousel-item:hover img {
-            transform: scale(1.05);
-        }
+    .carousel-track {
+      display: flex;
+      gap: 1rem;
+      scroll-snap-type: x mandatory;
+      will-change: transform;
+      padding-bottom: 1rem;
+    }
 
-        .carousel-button {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0, 0, 0, 0.5);
-            color: white;
-            border: none;
-            padding: 1rem;
-            cursor: pointer;
-            z-index: 10;
-            transition: background 0.3s ease;
-        }
+    .carousel-item {
+      flex: 0 0 auto;
+      max-width: 320px;
+      min-width: 200px;
+      scroll-snap-align: center;
+    }
 
-        .carousel-button:hover {
-            background: rgba(0, 0, 0, 0.7);
-        }
+    .carousel-item img {
+      width: 100%;
+      max-height: 400px;
+      object-fit: contain;
+      border-radius: 1rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
 
-        .carousel-prev {
-            left: 0.5rem;
-        }
+    .carousel-item:hover img {
+      transform: scale(1.05);
+    }
 
-        .carousel-next {
-            right: 0.5rem;
-        }
+    .whatsapp-btn {
+      background: #c8a957;
+      color: #1a1a1a;
+      transition: all 0.3s ease;
+    }
 
-        /* Image Overlay for Hero */
-        .hero-overlay {
-            background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.7));
-        }
-
-        /* WhatsApp Button */
-        .whatsapp-btn {
-            background: #f1c40f;
-            color: #1a1a1a;
-            transition: all 0.3s ease;
-        }
-
-        .whatsapp-btn:hover {
-            background: #d4ac0d;
-            transform: translateY(-3px);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Responsive Adjustments */
-        @media (max-width: 640px) {
-            .logo-animation { font-size: 3rem; }
-            .hero-section h1 { font-size: 3rem; }
-            .hero-section h2 { font-size: 1.5rem; }
-            .hero-section p { font-size: 1rem; }
-            .hero-section button { padding: 0.75rem 1.5rem; font-size: 0.875rem; }
-            .partnership-section h2 { font-size: 2.5rem; }
-            .partnership-section p { font-size: 1rem; }
-            .carousel-section h2 { font-size: 2.5rem; }
-            .carousel-item { flex: 0 0 70vw; max-width: 250px; }
-            .carousel-item img { max-height: 250px; }
-            .whatsapp-section h2 { font-size: 2.5rem; }
-            .whatsapp-section p { font-size: 1rem; }
-            .whatsapp-btn { padding: 0.75rem 1.5rem; font-size: 0.875rem; }
-            .whatsapp-btn svg { width: 1.25rem; height: 1.25rem; }
-            .footer h3 { font-size: 2rem; }
-            .footer p { font-size: 0.875rem; }
-            .carousel-button { padding: 0.5rem; }
-        }
-
-        @media (min-width: 641px) and (max-width: 1024px) {
-            .logo-animation { font-size: 4rem; }
-            .hero-section h1 { font-size: 5rem; }
-            .hero-section h2 { font-size: 2rem; }
-            .hero-section p { font-size: 1.25rem; }
-            .partnership-section h2 { font-size: 3.5rem; }
-            .carousel-section h2 { font-size: 3.5rem; }
-            .whatsapp-section h2 { font-size: 3.5rem; }
-        }
-    </style>
+    .whatsapp-btn:hover {
+      background: #a88a40;
+      transform: translateY(-3px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+    }
+  </style>
 </head>
 
 <body class="font-inter bg-gray-100">
-    <!-- Splash Screen -->
-    <div id="splashScreen" class="splash-screen">
-        <!-- EDITÁVEL: Nome da marca na splash screen -->
-        <div class="logo-animation font-playfair">Azzejo</div>
-    </div>
+  <div id="splashScreen" class="splash-screen">
+    <div class="logo-animation font-playfair">Azzejo</div>
+  </div>
 
-    <!-- Main Content -->
-    <div id="mainContent" style="display: none;">
-        <!-- Hero Section -->
-        <section class="section hero-section min-h-screen relative overflow-hidden">
-            <div class="absolute inset-0 hero-overlay">
-                <!-- EDITÁVEL: IMAGEM PRINCIPAL DO HERO -->
-                <!-- Substitua o src pelo caminho da sua imagem na pasta 'images'. -->
-                <!-- Exemplo: '/LandingAzj/images/Foto1.jpg' -->
-                <img src="/LandingAzj/images/Foto1.jpg" 
-                     alt="Modelo Azzejo" 
-                     class="w-full h-full object-cover">
-            </div>
-            
-            <div class="relative z-10 flex items-center justify-center min-h-screen px-4">
-                <div class="text-center text-white max-w-5xl">
-                    <!-- EDITÁVEL: Nome da marca principal -->
-                    <h1 class="font-playfair text-6xl md:text-8xl font-bold mb-8 tracking-tight">
-                        Azzejo
-                    </h1>
-                    
-                    <div class="bg-black/30 backdrop-blur-md rounded-3xl p-8 md:p-10 mb-10">
-                        <!-- EDITÁVEL: Título principal da CTA -->
-                        <h2 class="font-inter text-3xl md:text-4xl font-semibold mb-6 leading-tight">
-                            Moda Exclusiva para Revendedoras de Elite
-                        </h2>
-                        <!-- EDITÁVEL: Subtítulo da CTA -->
-                        <p class="text-xl md:text-2xl mb-8">
-                            Peças únicas que unem sofisticação e alta lucratividade.
-                        </p>
-                    </div>
-                    
-                    <!-- EDITÁVEL: Texto do botão -->
-                    <button onclick="scrollToCarousel()" class="bg-white text-gray-900 px-8 md:px-10 py-4 md:py-5 rounded-full font-semibold text-lg md:text-xl hover:bg-gray-200 transition-all duration-300 transform hover:scale-105 shadow-lg">
-                        Descubra Nossa Coleção
-                    </button>
-                </div>
-            </div>
-        </section>
+  <div id="mainContent" style="display: none;">
+    <section class="section hero-section min-h-screen relative overflow-hidden">
+      <div class="absolute inset-0">
+        <img src="/LandingAzj/images/Foto1.jpg" alt="Modelo Azzejo" class="w-full h-full object-cover" />
+      </div>
+      <div class="relative z-10 flex items-center justify-center min-h-screen px-4">
+        <div class="text-center text-white max-w-5xl">
+          <h1 class="font-playfair text-6xl md:text-8xl font-bold mb-8 tracking-tight drop-shadow-lg">Azzejo</h1>
+          <div class="bg-black/30 backdrop-blur-md rounded-3xl p-8 md:p-10 mb-10">
+            <h2 class="text-3xl md:text-4xl font-semibold mb-6 leading-tight">Moda Exclusiva para Revendedoras de Elite</h2>
+            <p class="text-xl md:text-2xl mb-8">Peças únicas que unem sofisticação e alta lucratividade.</p>
+          </div>
+          <button onclick="scrollToCarousel()"
+            class="bg-white text-gray-900 px-8 md:px-10 py-4 md:py-5 rounded-full font-semibold text-lg md:text-xl hover:bg-gray-200 transition-all duration-300 transform hover:scale-105 shadow-lg">
+            Descubra Nossa Coleção
+          </button>
+        </div>
+      </div>
+    </section>
 
-        <!-- Partnership Section -->
-        <section class="section partnership-section py-16 md:py-24 bg-white">
-            <div class="container mx-auto px-4">
-                <div class="flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
-                    <div class="lg:w-1/2">
-                        <!-- EDITÁVEL: IMAGEM DA SEÇÃO PARCERIA -->
-                        <!-- Substitua o src pelo caminho da sua imagem na pasta 'images'. -->
-                        <!-- Exemplo: '/LandingAzj/images/Foto2.jpg' -->
-                        <img src="/LandingAzj/images/Foto2.jpg" 
-                             alt="Modelo Parceria" 
-                             class="w-full rounded-3xl shadow-2xl object-cover">
-                    </div>
-                    
-                    <div class="lg:w-1/2 text-center lg:text-left">
-                        <!-- EDITÁVEL: Título da seção parceria -->
-                        <h2 class="font-playfair text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 md:mb-8 tracking-tight">
-                            A Parceira Perfeita para Sua Revenda de Luxo
-                        </h2>
-                        <!-- EDITÁVEL: Descrição da seção parceria -->
-                        <p class="text-lg md:text-xl text-gray-700 leading-relaxed">
-                            Peças exclusivas, acabamento impecável e margens que impulsionam seu negócio no mercado premium.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <section class="section partnership-section py-16 md:py-24 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
+          <div class="lg:w-1/2">
+            <img src="/LandingAzj/images/Foto2.jpg" alt="Modelo Parceria"
+              class="w-full rounded-3xl shadow-2xl object-cover" />
+          </div>
+          <div class="lg:w-1/2 text-center lg:text-left">
+            <h2 class="font-playfair text-5xl font-bold text-gray-900 mb-6">A Parceira Perfeita para Sua Revenda de Luxo</h2>
+            <p class="text-lg md:text-xl text-gray-700 leading-relaxed">Peças exclusivas, acabamento impecável e margens que
+              impulsionam seu negócio no mercado premium.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        <!-- Carousel Section -->
-        <section id="carousel-section" class="section carousel-section py-16 md:py-24 bg-gray-50">
-            <div class="container mx-auto px-4">
-                <!-- EDITÁVEL: Título da seção do carrossel -->
-                <h2 class="font-playfair text-4xl md:text-5xl lg:text-6xl font-bold text-center text-gray-900 mb-12 md:mb-16 tracking-tight">
-                    Coleção Exclusiva Azzejo
-                </h2>
-                
-                <div class="carousel-container relative">
-                    <button class="carousel-button carousel-prev" onclick="scrollCarousel(-1)">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-                        </svg>
-                    </button>
-                    <div id="carouselTrack" class="carousel-track">
-                        <!-- Carousel items will be generated by JavaScript -->
-                    </div>
-                    <button class="carousel-button carousel-next" onclick="scrollCarousel(1)">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        </section>
+    <section id="carousel-section" class="section carousel-section py-16 md:py-24 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <h2 class="font-playfair text-5xl font-bold text-center text-gray-900 mb-12">Coleção Exclusiva Azzejo</h2>
+        <div class="carousel-container">
+          <div id="carouselTrack" class="carousel-track">
+            <!-- Imagens geradas via JS -->
+          </div>
+        </div>
+      </div>
+    </section>
 
-        <!-- WhatsApp CTA Section -->
-        <section class="section whatsapp-section py-16 md:py-24 bg-gradient-to-r from-gray-900 to-indigo-900">
-            <div class="container mx-auto px-4 text-center">
-                <!-- EDITÁVEL: Título da seção WhatsApp -->
-                <h2 class="font-playfair text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 md:mb-10 tracking-tight">
-                    Transforme Sua Revenda Hoje
-                </h2>
-                <!-- EDITÁVEL: Descrição da seção WhatsApp -->
-                <p class="text-lg md:text-xl text-gray-200 mb-8 md:mb-10 max-w-3xl mx-auto">
-                    Fale com nossa equipe e descubra como a Azzejo eleva seu negócio ao próximo nível.
-                </p>
-                <!-- EDITÁVEL: Valor mínimo do pedido (acima do botão) -->
-                <p class="text-lg md:text-xl font-medium bg-yellow-400 text-gray-900 px-6 md:px-8 py-3 md:py-4 rounded-full inline-block mb-6">
-                    Pedidos a partir de R$ 700,00
-                </p>
-                
-                <!-- EDITÁVEL: NÚMERO DO WHATSAPP -->
-                <!-- Substitua 5511999999999 pelo número real. -->
-                <!-- Formato: 55 + DDD + número (sem espaços ou caracteres especiais). -->
-                <!-- Exemplo: 5511987654321 -->
-                <a href="https://wa.me/5511999999999?text=Olá! Gostaria de saber mais sobre revenda Azzejo" 
-                   target="_blank" 
-                   class="whatsapp-btn inline-flex items-center px-8 md:px-10 py-4 md:py-5 rounded-full font-semibold text-lg md:text-xl shadow-xl">
-                    <svg class="w-6 md:w-7 h-6 md:h-7 mr-3" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
-                    </svg>
-                    Fale Conosco no WhatsApp
-                </a>
-            </div>
-        </section>
+    <section class="section whatsapp-section py-16 md:py-24 bg-gradient-to-r from-gray-900 to-gray-800">
+      <div class="container mx-auto px-4 text-center">
+        <h2 class="font-playfair text-5xl font-bold text-white mb-8">Transforme Sua Revenda Hoje</h2>
+        <p class="text-lg md:text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
+          Fale com nossa equipe e descubra como a Azzejo eleva seu negócio ao próximo nível.
+        </p>
+        <p class="text-lg md:text-xl font-medium bg-yellow-400 text-gray-900 px-6 py-3 rounded-full inline-block mb-6">
+          Pedidos a partir de R$ 700,00
+        </p>
+        <a href="https://wa.me/5511999999999?text=Olá! Gostaria de saber mais sobre revenda Azzejo" target="_blank"
+          class="whatsapp-btn inline-flex items-center px-8 py-4 rounded-full font-semibold text-lg shadow-xl">
+          <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24">
+            <path
+              d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967..." />
+          </svg>
+          Fale Conosco no WhatsApp
+        </a>
+      </div>
+    </section>
 
-        <!-- Footer -->
-        <section class="section footer bg-black text-white py-12 md:py-16">
-            <div class="container mx-auto px-4 text-center">
-                <!-- EDITÁVEL: Nome da marca no footer -->
-                <h3 class="font-playfair text-3xl md:text-4xl font-bold mb-4 md:mb-6">Azzejo</h3>
-                <!-- EDITÁVEL: Descrição no footer -->
-                <p class="text-gray-300 mb-4 md:mb-6 text-sm md:text-base">Moda feminina atacado para revendedoras de alto padrão</p>
-                <!-- EDITÁVEL: Copyright -->
-                <p class="text-xs md:text-sm text-gray-500">© 2025 Azzejo. Todos os direitos reservados.</p>
-            </div>
-        </section>
-    </div>
+    <section class="section footer bg-black text-white py-12">
+      <div class="container mx-auto px-4 text-center">
+        <h3 class="font-playfair text-3xl font-bold mb-4">Azzejo</h3>
+        <p class="text-gray-300 mb-4 text-sm">Moda feminina atacado para revendedoras de alto padrão</p>
+        <p class="text-xs text-gray-500">© 2025 Azzejo. Todos os direitos reservados.</p>
+      </div>
+    </section>
+  </div>
 
-    <script type="module">
-        // Splash screen functionality
-        window.addEventListener('load', function() {
-            setTimeout(function() {
-                const splashScreen = document.getElementById('splashScreen');
-                const mainContent = document.getElementById('mainContent');
-                
-                splashScreen.classList.add('fade-out');
-                
-                setTimeout(function() {
-                    splashScreen.style.display = 'none';
-                    mainContent.style.display = 'block';
-                    initializeCarousel();
-                    initializeSectionTransitions();
-                }, 1000);
-            }, 2000);
+  <script type="module">
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('splashScreen').classList.add('fade-out');
+        setTimeout(() => {
+          document.getElementById('splashScreen').style.display = 'none';
+          document.getElementById('mainContent').style.display = 'block';
+          initializeCarousel();
+          initializeSectionTransitions();
+        }, 1000);
+      }, 2000);
+    });
+
+    window.scrollToCarousel = function () {
+      const carouselSection = document.getElementById('carousel-section');
+      if (carouselSection) carouselSection.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function initializeSectionTransitions() {
+      const sections = document.querySelectorAll('.section');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) entry.target.classList.add('visible');
         });
+      }, { threshold: 0.2 });
 
-        // Scroll to carousel function
-        window.scrollToCarousel = function() {
-            console.log('Botão "Descubra Nossa Coleção" clicado');
-            const carouselSection = document.getElementById('carousel-section');
-            if (carouselSection) {
-                carouselSection.scrollIntoView({ 
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            } else {
-                console.error('Elemento com ID "carousel-section" não encontrado');
-            }
-        };
+      sections.forEach(section => observer.observe(section));
+    }
 
-        // Section transitions
-        function initializeSectionTransitions() {
-            const sections = document.querySelectorAll('.section');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, { threshold: 0.2 });
+    function initializeCarousel() {
+      const track = document.getElementById('carouselTrack');
+      const images = [
+        '/LandingAzj/images/foto3.jpg',
+        '/LandingAzj/images/foto4.jpg',
+        '/LandingAzj/images/foto5.jpg',
+        '/LandingAzj/images/foto6.jpg',
+        '/LandingAzj/images/foto7.jpg'
+      ];
 
-            sections.forEach(section => observer.observe(section));
-        }
-
-        // Carousel functionality
-        function initializeCarousel() {
-            const track = document.getElementById('carouselTrack');
-            const container = document.querySelector('.carousel-container');
-            
-            /* EDITÁVEL: IMAGENS DO CARROSSEL */
-            /* Substitua os caminhos abaixo pelos das suas imagens na pasta 'images'. */
-            /* Exemplo: '/LandingAzj/images/foto3.jpg' */
-            /* Certifique-se de que as imagens existem e os nomes correspondem exatamente. */
-            const carouselItems = [
-                '/LandingAzj/images/foto3.jpg',
-                '/LandingAzj/images/foto4.jpg',
-                '/LandingAzj/images/foto5.jpg',
-                '/LandingAzj/images/foto6.jpg',
-                '/LandingAzj/images/foto7.jpg',
-                '/LandingAzj/images/foto8.jpg'
-            ];
-
-            let currentIndex = 0;
-            const totalItems = carouselItems.length;
-
-            // Criar itens do carrossel
-            carouselItems.forEach((item, index) => {
-                const carouselItem = document.createElement('div');
-                carouselItem.className = 'carousel-item';
-                
-                carouselItem.innerHTML = `
-                    <img src="${item}" 
-                         alt="Roupa ${index + 1}" 
-                         class="w-full h-full object-contain">
-                `;
-                track.appendChild(carouselItem);
-            });
-
-            // Ajustar largura total do track
-            track.style.width = `${totalItems * 70}vw`;
-
-            function updateCarousel() {
-                const translateX = -((currentIndex * 70) / 100) * (container.offsetWidth / (70 / 100));
-                track.style.transform = `translateX(${translateX}px)`;
-            }
-
-            // Botões de navegação com loop
-            window.scrollCarousel = function(direction) {
-                currentIndex = (currentIndex + direction + totalItems) % totalItems;
-                updateCarousel();
-            };
-
-            // Deslize com toque com loop
-            let isDragging = false;
-            let startX = 0;
-            let currentX = 0;
-
-            track.addEventListener('touchstart', (e) => {
-                isDragging = true;
-                startX = e.touches[0].clientX;
-                track.style.transition = 'none'; // Desativa transição durante o toque
-            });
-
-            track.addEventListener('touchmove', (e) => {
-                if (!isDragging) return;
-                e.preventDefault();
-                currentX = e.touches[0].clientX;
-                const diff = (startX - currentX) / (container.offsetWidth / 70); // Converte para índice
-                const newIndex = Math.round(currentIndex - diff);
-                currentIndex = (newIndex + totalItems) % totalItems;
-                updateCarousel();
-            });
-
-            track.addEventListener('touchend', () => {
-                isDragging = false;
-                track.style.transition = 'transform 0.5s ease-in-out'; // Reativa transição suave
-                updateCarousel();
-            });
-
-            // Inicializa o carrossel
-            updateCarousel();
-        }
-    </script>
+      images.forEach((src, index) => {
+        const item = document.createElement('div');
+        item.className = 'carousel-item';
+        item.innerHTML = `<img src="${src}" alt="Roupa ${index + 1}">`;
+        track.appendChild(item);
+      });
+    }
+  </script>
 </body>
 
 </html>
